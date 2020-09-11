@@ -140,10 +140,10 @@ string bitacora :: getRazonFalla() {
 }
 void bitacora :: print() {
     cout << "Mes: " << mes << endl;
-    cout << "Día: " << dia << endl;
+    cout << "Dia: " << dia << endl;
     cout << "Hora: " << hora << endl;
-    cout << "Dirección IP: " << direccionIP << endl;
-    cout << "Razón de falla: " << razonFalla << endl;
+    cout << "Direccion IP: " << direccionIP << endl;
+    cout << "Razon de falla: " << razonFalla << endl;
     cout << "Key producida: " << key << endl;
 }
 
