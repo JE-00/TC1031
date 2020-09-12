@@ -51,13 +51,13 @@ bitacora :: bitacora(string mes, int dia, string hora, string direccionIP, strin
     this -> hora = hora;
     this -> direccionIP = direccionIP;
     this -> razonFalla = razonFalla;
-    if (mes == "Ene") {
+    if (mes == "Jan") {
         key = stoi("01")*100+dia;
     } else if (mes == "Feb") {
         key = stoi("02")*100+dia;
     } else if (mes == "Mar"){
         key = stoi("03")*100+dia;
-    } else if (mes == "Abr"){
+    } else if (mes == "Apr"){
         key = stoi("04")*100+dia;
     } else if (mes == "May"){
         key = stoi("05")*100+dia;
@@ -65,7 +65,7 @@ bitacora :: bitacora(string mes, int dia, string hora, string direccionIP, strin
         key = stoi("06")*100+dia;
     } else if (mes == "Jul"){
         key = stoi("07")*100+dia;
-    } else if (mes == "Ago"){
+    } else if (mes == "Aug"){
         key = stoi("08")*100+dia;
     } else if (mes == "Sep"){
         key = stoi("09")*100+dia;
@@ -73,19 +73,19 @@ bitacora :: bitacora(string mes, int dia, string hora, string direccionIP, strin
         key = stoi("10")*100+dia;
     } else if (mes == "Nov"){
         key = stoi("11")*100+dia;
-    } else if (mes == "Dic"){
+    } else if (mes == "Dec"){
         key = stoi("12")*100+dia;
     }
 }
 
 void bitacora :: setKey(string mes, int dia) {
-    if (mes == "Ene") {
+    if (mes == "Jan") {
         key = stoi("01")*100+dia;
     } else if (mes == "Feb") {
         key = stoi("02")*100+dia;
     } else if (mes == "Mar"){
         key = stoi("03")*100+dia;
-    } else if (mes == "Abr"){
+    } else if (mes == "Apr"){
         key = stoi("04")*100+dia;
     } else if (mes == "May"){
         key = stoi("05")*100+dia;
@@ -93,7 +93,7 @@ void bitacora :: setKey(string mes, int dia) {
         key = stoi("06")*100+dia;
     } else if (mes == "Jul"){
         key = stoi("07")*100+dia;
-    } else if (mes == "Ago"){
+    } else if (mes == "Aug"){
         key = stoi("08")*100+dia;
     } else if (mes == "Sep"){
         key = stoi("09")*100+dia;
@@ -101,7 +101,7 @@ void bitacora :: setKey(string mes, int dia) {
         key = stoi("10")*100+dia;
     } else if (mes == "Nov"){
         key = stoi("11")*100+dia;
-    } else if (mes == "Dic"){
+    } else if (mes == "Dec"){
         key = stoi("12")*100+dia;
     }
 }

@@ -3,7 +3,6 @@
 //
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <fstream>
 #include <vector>
 
@@ -11,49 +10,41 @@ using namespace std;
 
 #include "bitacora.h"
 
-int main() {
-    vector<bitacora*> registros;
-
+void leerArchivo(vector <bitacora*> &registros) {
     ifstream archBitacora("C:\\Users\\josee\\CLionProjects\\TC1031\\bitacora.txt");
     string line, valor;
-    char delim = ' ';
-    int col, dia;
+    int dia;
     string mes, hora, direccionIP, razonFalla;
 
     if (archBitacora.is_open()) {
-        getline(archBitacora, line);
-        //cout << "entra al if";
-        while (getline(archBitacora, line)) {
-            stringstream ss(line);
-            col = 0;
-            //cout << "entra al while";
-            while (getline(ss, valor, delim)) {
-                //cout << "entra al segundo while";
-                switch (col) {
-                    case 0:
-                        mes = valor;
-                        break;
-                    case 1:
-                        dia = stoi(valor);
-                        break;
-                    case 2:
-                        hora = valor;
-                        break;
-                    case 3:
-                        direccionIP = valor;
-                        break;
-                    case 4:
-                        razonFalla = valor;
-                        break;
-                } col++;
-            } registros.push_back(new bitacora(mes, dia, hora, direccionIP, razonFalla));
+        while (getline(archBitacora,line)) {
+            archBitacora >> mes >> dia >> hora >> direccionIP >> razonFalla;
+            registros.push_back(new bitacora(mes, dia, hora, direccionIP, razonFalla));
         } archBitacora.close();
     }
+}
+
+void guardarArchivo(vector<bitacora*> registros) {
+    ofstream archNuevaB("C:\\Users\\josee\\CLionProjects\\TC1031\\nuevaBitacora.txt");
+    if (archNuevaB.is_open()) {
+        for (int i = 0; i < registros.size(); ++i) {
+            archNuevaB << registros[i]->getMes() << " " << registros[i]->getDia() << " " << registros[i]->getHora() <<
+            " " << registros[i]->getDireccionIP() << " " << registros[i]->getRazonFalla() << endl;
+        } archNuevaB.close();
+    }
+}
+
+int main() {
+    vector<bitacora*> registros;
+
+    leerArchivo(registros);
 
     for (int i = 0; i < registros.size(); ++i) {
-        cout << "Registro " << i << endl;
+        cout << "Registro " << i + 1 << endl;
         registros[i] -> print();
     }
+
+    guardarArchivo(registros);
 
     return 0;
 }
