@@ -44,20 +44,58 @@ void guardarArchivo(vector<bitacora*> registros) {
     }
 }
 
+//Función de sort
+int particion(vector <bitacora*> &registros, int i, int f, int &pivote) {
+    bitacora *elempivote = registros[i], *temp;
+    int ini = i, cant = 0;
+    for (int k = i; k <= f; ++k) {
+        cant++;
+        if (registros[k]->getKey() < elempivote->getKey()) {
+            ini++;
+            temp = registros[k];
+            registros[k] = registros[ini];
+            registros[ini] = temp;
+        }
+    }
+    pivote = ini;
+    temp = registros[i];
+    registros[i] = registros[pivote];
+    registros[pivote] = temp;
+    return cant;
+}
+
+int quick(vector <bitacora*> &registros, int i, int f) {
+    int cant = 0, pivote;
+    if (i < f) {
+        cant += particion(registros, i, f, pivote);
+        cant += quick(registros, i, pivote-1);
+        cant += quick(registros, pivote+1, f);
+    } return cant;
+}
+
 // Complejidad O(n^2)
 int main() {
 
     // Crea el vector reegistros de tipo bitacora
     vector<bitacora*> registros;
 
+    vector<int> aux(registros.size());
+
     // Llama a la función leerArchivo
     leerArchivo(registros);
 
+    // Llamar a la función sort
+    quick(registros,0,registros.size()-1);
+    //merge(registros,aux, 0, registros.size());
+
     // En un ciclo de 0 al numero de elementos en el vector registros se imprimmen los atributos de cada elemento bitacora con el método print
+
     for (int i = 0; i < registros.size(); ++i) {
         cout << "Registro " << i + 1 << endl;
         registros[i] -> print();
     }
+
+
 
     // Llama a la función guardarArchivo
     guardarArchivo(registros);
