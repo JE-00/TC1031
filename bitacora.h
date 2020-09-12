@@ -7,7 +7,7 @@
 
 
 class bitacora {
-// Se declaran atributos privados, la key es un código para faciliar el manejo de los registros
+// Se declaran atributos privados, la key es un código para facilitar el manejo de los registros
 private:
     int key;
     string mes;
@@ -15,11 +15,13 @@ private:
     string hora;
     string direccionIP;
     string razonFalla;
-// Se declaran los métodos, en el constructor no se usa el key porque este se produce dentro del contructor
+// Se declaran los métodos, en el constructor con parametros no se recibe el key porque este se produce dentro del contructor
 public:
+    // Constructores
     bitacora();
     bitacora(string mes, int dia, string hora, string direccionIP, string razonFalla);
 
+    // Setters, se usan para modificar los atributos de acuerdo a parámetros
     void setKey(string mes, int dia);
     void setMes(string mes);
     void setDia(int dia);
@@ -27,6 +29,7 @@ public:
     void setDireccionIP(string direccionIP);
     void setRazonFalla(string razonFalla);
 
+    // Getters, se usan para obtener los valores de los atributos
     int getKey();
     string getMes();
     int getDia();
@@ -34,9 +37,11 @@ public:
     string getDireccionIP();
     string getRazonFalla();
 
+    // Método print, para facilitar impresión de cada registro
     void print();
 };
 
+// Método constructor vacío
 bitacora ::bitacora() {
     key = 0101;
     mes = "Ene";
@@ -45,12 +50,14 @@ bitacora ::bitacora() {
     direccionIP = "111.22.333.444:555";
     razonFalla = "Failed password for illegal user guest, root or admin";
 }
+// Método constructor con parámetros
 bitacora :: bitacora(string mes, int dia, string hora, string direccionIP, string razonFalla) {
     this -> mes = mes;
     this -> dia = dia;
     this -> hora = hora;
     this -> direccionIP = direccionIP;
     this -> razonFalla = razonFalla;
+    // Para crear las keys se toma la string del mes y se le asigna un valor numerico del 1 al 12 dependiendo del mes
     if (mes == "Jan") {
         key = stoi("01")*100+dia;
     } else if (mes == "Feb") {
@@ -78,6 +85,7 @@ bitacora :: bitacora(string mes, int dia, string hora, string direccionIP, strin
     }
 }
 
+// Setter de la key - Para crear las keys se toma la string del mes y se le asigna un valor numerico del 1 al 12 dependiendo del mes
 void bitacora :: setKey(string mes, int dia) {
     if (mes == "Jan") {
         key = stoi("01")*100+dia;
@@ -105,39 +113,51 @@ void bitacora :: setKey(string mes, int dia) {
         key = stoi("12")*100+dia;
     }
 }
+// Setter de mes, se recibe un string y se asigna al atributo mes
 void bitacora :: setMes(string mes) {
     this -> mes = mes;
 }
+// Setter de dia, se recibe un int y se asigna al atributo dia
 void bitacora :: setDia(int dia) {
     this -> dia = dia;
 }
+// Setter de hora, se recibe un string y se asigna al atributo hora
 void bitacora :: setHora(string hora) {
     this -> hora = hora;
 }
+// Setter de direccionIP, se recibe un string y se asigna al atributo direccionIP
 void bitacora :: setDireccionIP(string direccionIP) {
     this -> direccionIP = direccionIP;
 }
+// Setter de razonFalla, se recibe un string y se asigna al atributo razonFalla
 void bitacora :: setRazonFalla(string razonFalla) {
     this -> razonFalla = razonFalla;
 }
+// Getter de key, regresa el valor de la key generada
 int bitacora :: getKey() {
     return key;
 }
+// Getter de mes, regresa el valor del atributo mes
 string bitacora :: getMes() {
     return mes;
 }
+// Getter de dia, regresa el valor del atributo dia
 int bitacora :: getDia() {
     return dia;
 }
+// Getter de hora, regresa el valor del atributo hora
 string bitacora :: getHora() {
     return hora;
 }
+// Getter de direccionIP, regresa el valor del atributo direccionIP
 string bitacora :: getDireccionIP() {
     return direccionIP;
 }
+// Getter de razonFalla, regresa el valor del atributo razonFalla
 string bitacora :: getRazonFalla() {
     return razonFalla;
 }
+// Método print, muestra los atributos en pantalla
 void bitacora :: print() {
     cout << "Mes: " << mes << endl;
     cout << "Dia: " << dia << endl;
