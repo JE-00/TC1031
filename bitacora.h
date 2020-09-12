@@ -22,6 +22,7 @@ public:
     bitacora(string mes, int dia, string hora, string direccionIP, string razonFalla);
 
     // Setters, se usan para modificar los atributos de acuerdo a parámetros
+    void setKey(int aux);
     void setKey(string mes, int dia);
     void setMes(string mes);
     void setDia(int dia);
@@ -83,6 +84,10 @@ bitacora :: bitacora(string mes, int dia, string hora, string direccionIP, strin
     } else if (mes == "Dec"){
         key = stoi("12")*100+dia;
     }
+}
+
+void bitacora :: setKey(int aux) {
+    key = aux;
 }
 
 // Setter de la key - Para crear las keys se toma la string del mes y se le asigna un valor numerico del 1 al 12 dependiendo del mes
