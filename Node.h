@@ -4,11 +4,29 @@
 
 #ifndef TC1031_NODE_H
 #define TC1031_NODE_H
+
+long ipToLong(string ip){
+    int idx = 0;
+    long datoFinal= 0, dato = 0;
+    while (idx < ip.size()){
+        if (ip[idx]!= '.' && ip[idx]!=':'){
+            dato = dato*10 + ip[idx]-'0';
+        }
+        else{
+            datoFinal = datoFinal*1000 + dato;
+            dato = 0;
+        }
+        idx++;
+    }
+    datoFinal = datoFinal*10000 + dato;
+    return datoFinal;
+}
+
 struct info {
-    long key;
     string fechaHora;
     string ip;
     string motivo;
+    long key = ipToLong(ip);
 };
 
 class Node{

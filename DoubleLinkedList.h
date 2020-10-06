@@ -58,18 +58,24 @@ void DoubleLinkedList ::addLast(info data) {
 
 void DoubleLinkedList ::sort() {
     int temp;
-    bool interruptor = true;
-    for (int pas = 0; pas < size - 1 && interruptor; ++pas) {
+    Node *curr1 = head;
+    Node *curr2 = nullptr;
+    Node *aux = nullptr;
+    bool interruptor = false;
+
+    if (head == nullptr) return;
+    do {
         interruptor = false;
-        for (int j = 0; j < size - 1 - pas; ++j) { // Estoy trabajando en esto - J
-            if (vec[j+1] < vec[j]) {
-                temp = vec[j+1];
-                vec[j+1] = vec[j];
-                vec[j] = temp;
+        while (curr1 -> getNext() != curr2) {
+            if (curr1 -> getData().key > curr1->getNext()->getData().key) {
+                aux->setData(curr1->getData());
+                curr1->setData(curr1->getNext()->getData());
+                curr1->getNext()->setData(aux->getData());
                 interruptor = true;
             }
-        }
-    }
+            curr1 = curr1 ->getNext();
+        } curr2 = curr1;
+    } while (interruptor);
 }
 
 void DoubleLinkedList ::print() {
