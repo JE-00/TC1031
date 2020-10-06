@@ -15,6 +15,7 @@ using namespace std;
 
 #include "Meses.h"
 #include "bitacora.h"
+#include "DoubleLinkedList.h"
 
 // Complejidad: O(n^2) <- Complejidad incluyendo la complejidad del getline
 void leerArchivo(vector <bitacora*> &registros) {
@@ -172,6 +173,11 @@ int main() {
 
     //Llama a la funcion guardarArchivo
     guardarArchivo(registros);
+
+    //Prueba de DoubleLinkedList
+
+
+
 
     return 0;
 }
