@@ -1,2 +1,2 @@
 language = "cpp"
-run = "cd build && cmake ../ && cmake --build . && ./main"
+run = "clang++-7 -pthread -std=c++14 -o main main.cpp && ./main"
