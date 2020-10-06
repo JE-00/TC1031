@@ -3,4 +3,4 @@ project(TC1031)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(TC1031 main.cpp)
+add_executable(TC1031 main.cpp DoubleLinkedList.h Node.h)
