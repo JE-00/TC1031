@@ -67,6 +67,7 @@ Node* Node :: getPrev() {
 }
 void Node ::setData(info data) {
     this -> data = data;
+    data.key = ipToLong(data.ip);
 }
 void Node :: setNext(Node *next) {
     this -> next = next;

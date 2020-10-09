@@ -1,5 +1,5 @@
 // Actividad 1.3
-// Numero de equipo  : 14
+// Numero de equipo : 14
 /*
  * Integrantes:
  * Maribel Alvarez Flores A00828510
@@ -9,7 +9,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <vector>
 
 using namespace std;
 
@@ -18,27 +17,31 @@ using namespace std;
 #include "DoubleLinkedList.h"
 
 // Complejidad: O(n^2) <- Complejidad incluyendo la complejidad del getline
-void leerArchivo(vector <bitacora*> &registros) {
+void leerArchivo(DoubleLinkedList &lista) {
     // Se lee el archivo "bitacora.txt"
     ifstream archBitacora("C:\\Users\\josee\\CLionProjects\\TC1031\\bitacora.txt");
     // Se declaran las variables de los atributos de los registros
-    int dia;
-    string line, valor, mes, hora, direccionIP, razonFalla;
+    string dia, mes, hora;
+    string fechaHora, ip, motivo;
+    info data;
 
     // Se lee cada linea del archivo y se guardan en un vector de bitacoras llamado registros
     if (archBitacora.is_open()) {
-        // Se leen en archBitacora >> mes >> dia >> hora >> direccionIP
-        while (archBitacora >> mes >> dia >> hora >> direccionIP) {
+        // Se leen en archBitacora >> fechaHora
+        while (archBitacora >> dia >> mes >> hora >> data.ip) {
             // Se lee y guarda el resto de la linea en razonFalla
-            getline(archBitacora,razonFalla);
+            getline(archBitacora,data.motivo);
+
+            data.fechaHora = dia + ' ' + mes + ' ' + hora;
             // Se guardan los elementos como atributos de elementos bitacora del vector registros
-            registros.push_back(new bitacora(mes, dia, hora, direccionIP, razonFalla));
+            lista.addLast(data);
         }
         // Se cierra el archivo bitacora.txt para evitar daños
         archBitacora.close();
     }
 }
 
+/*
 // O(n)
 int une(vector<bitacora*> &vec, vector<bitacora*> &aux, int ini, int fin){
     int m = (ini + fin)/2;
@@ -113,53 +116,45 @@ int busqBin(vector <bitacora*> &v, Meses fecha, int &cantidadBs, string iof){
 }
 
 // Complejidad: O(n)
-void guardarArchivo(vector<bitacora*> registros) {
+void guardarArchivo(DoubleLinkedList *lista) {
     ofstream archNuevaB("C:\\Users\\josee\\CLionProjects\\TC1031\\nuevaBitacora.txt");
     if (archNuevaB.is_open()) {
         // En un ciclo de 0 al tamaño del vector registros se imprimen los atributos de cada elemento separados por un espacio
-        for (int i = 0; i < registros.size(); ++i) {
-            archNuevaB << registros[i]->getMes() << " " << registros[i]->getDia() << " " << registros[i]->getHora() <<
+        for (int i = 0; i < lista->size(); ++i) {
+            archNuevaB << lista. << " " << registros[i]->getDia() << " " << registros[i]->getHora() <<
                        " " << registros[i]->getDireccionIP() << registros[i]->getRazonFalla() << endl;
         } archNuevaB.close(); // Se cierra archNuevaB para guardar cambios
     }
 }
+*/
 
 int main() {
-    int cantidadBs, n , dia;
-    string mes ;
+    string ipi, ipf;
     string iof = "inicio" ;
     int ini, fini ;
 
 
     // Crea el vector reegistros de tipo bitacora
-    vector<bitacora*> registros;
+    DoubleLinkedList lista;
 
     // Llama a la función leerArchivo
-    leerArchivo(registros);
+    leerArchivo(lista);
 
-    n = registros.size() ;
-    vector<bitacora*> aux(n) ;
+    int n = lista.size();
 
-    //Despliega la cantidad de comparaciones que realizo el metodo merge para ordenar nuestro vector
-    cout << merge(registros, aux, 0, n-1) <<endl;
+    lista.print();
 
-    //Pide al usuario la fecha inicial a buscar
-    cout << "Ingresa el mes del inicio de la busqueda "<<endl ;
-    cin >> mes ;
-    cout << "Ingresa el dia de inicio de la busqueda "<<endl ;
-    cin >> dia ;
+    lista.sort();
 
-    Meses inicio(mes,dia);
+    lista.print();
 
-    //Pide al usuario la fecha final a buscar
-    cout << "Ingresa el mes de fin de la busqueda"<<endl ;
-    cin >> mes ;
-    cout << "Ingresa el dia de fin de la busqueda "<<endl ;
-    cin >> dia ;
+    //Pide al usuario el ip inicial y final a buscar
+    cout << "Ingresa el ip de inicio de la busqueda "<<endl ;
+    cin >> ipi;
+    cout << "Ingresa el ip de final de la busqueda "<<endl ;
+    cin >> ipf;
 
-    Meses fin(mes,dia);
-
-
+    /*
     //Busca el primer indice en donde encuentre la fecha buscada por el usuario
     ini = busqBin(registros, inicio, cantidadBs, iof);
     iof ="fin" ;
@@ -172,7 +167,8 @@ int main() {
     }
 
     //Llama a la funcion guardarArchivo
-    guardarArchivo(registros);
+    guardarArchivo(lista);
+    */
 
     //Prueba de DoubleLinkedList
 

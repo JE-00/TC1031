@@ -13,18 +13,19 @@ public:
     ~DoubleLinkedList();
     void addFirst(info data);
     void addLast(info data);
+    int size();
     void sort();
     void print();
 private:
     Node *head;
     Node *tail;
-    int size;
+    int tamanio;
 };
 
 DoubleLinkedList :: DoubleLinkedList() {
     head = nullptr;
     tail = nullptr;
-    size = 0;
+    tamanio = 0;
 }
 DoubleLinkedList :: ~DoubleLinkedList() {
     Node *curr1 = head;
@@ -42,22 +43,25 @@ void DoubleLinkedList :: addFirst(info data) {
     if (head != nullptr) {
         head = new Node (data, head -> getPrev(), head);
     } else {
-        head = new Node (data, head, tail);
+        head = tail = new Node (data, head, tail);
     }
-    size++;
+    tamanio++;
 }
 
 void DoubleLinkedList ::addLast(info data) {
     if (tail != nullptr) {
         tail = new Node (data, tail, tail->getNext());
     } else {
-        tail = new Node (data, head, tail);
+        tail = head = new Node (data, head, tail);
     }
-    size++;
+    tamanio++;
+}
+
+int DoubleLinkedList ::size() {
+    return tamanio;
 }
 
 void DoubleLinkedList ::sort() {
-    int temp;
     Node *curr1 = head;
     Node *curr2 = nullptr;
     Node *aux = nullptr;
@@ -85,7 +89,7 @@ void DoubleLinkedList ::print() {
         cout << "--------------------------------" << endl;
         cout << curr->getData().fechaHora << " ";
         cout << curr->getData().ip << " ";
-        cout << curr->getData().key << " ";
+        cout << curr->getData().key;
         cout << curr->getData().motivo << endl;
 
         curr = curr->getNext();
