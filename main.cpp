@@ -129,9 +129,9 @@ void guardarArchivo(DoubleLinkedList *lista) {
 */
 
 int main() {
-    string ipi, ipf;
-    string iof = "inicio" ;
-    int ini, fini ;
+    string ipi, ipf, ipb;
+    string iof = "inicio";
+    int ini, fini;
 
 
     // Crea el vector reegistros de tipo bitacora
@@ -149,6 +149,8 @@ int main() {
     lista.print();
 
     //Pide al usuario el ip inicial y final a buscar
+    cout << "INgresa el ip a buscar" << endl;
+    cin >> ipb;
     cout << "Ingresa el ip de inicio de la busqueda "<<endl ;
     cin >> ipi;
     cout << "Ingresa el ip de final de la busqueda "<<endl ;
