@@ -27,7 +27,7 @@ struct info {
     string fechaHora;
     string ip;
     string motivo;
-    long long key = ipToLong(ip);
+    long long key;
 };
 
 class Node{
