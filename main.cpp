@@ -43,50 +43,9 @@ void leerArchivo(DoubleLinkedList &lista) {
 }
 
 /*
-// O(n)
-int une(vector<bitacora*> &vec, vector<bitacora*> &aux, int ini, int fin){
-    int m = (ini + fin)/2;
-    int i = ini, j = m + 1, k = ini ;
-    int cant = 0 ;
-
-    while (i <= m && j<=fin){
-        cant ++ ;
-        if (vec[i]->getKey() <= vec[j]->getKey()){
-            aux[k++] = vec[i++] ;
-        }else{
-            aux[k++] = vec[j++] ;
-        }
-    }
-    while (i <= m){
-        aux[k++] = vec[i++] ;
-    }
-
-    while (j <= fin){
-        aux[k++] = vec[j++] ;
-    }
-
-    for (int z = ini; z<= fin; z++){
-        vec[z] = aux[z] ;
-    }
-    return cant ;
-}
-
-//Esta funcion acomoda un vector de forma ascendente por medio del metodo de merge, este metodo hace uso de la recursividad y de una funcion extra que es la de "une"
-// MEJOR Y PEOR CASO: O(n log n)
-int merge (vector<bitacora*> &vec, vector<bitacora*> &aux, int ini, int fin){
-    int cant = 0;
-    if (ini < fin){
-        int m = (ini + fin) / 2 ;
-        cant += merge (vec,aux, ini, m);
-        cant += merge (vec, aux, m+1, fin);
-        cant += une(vec,aux, ini,fin);
-    }
-    return cant ;
-}
-
 // Esta funcion utiliza el metodo de la busqueda binaria para encontrar un dato en un vector que es buscado por el usuario
 //  O(log2n)
-int busqBin(vector <bitacora*> &v, Meses fecha, int &cantidadBs, string iof){
+int busqBin(DoubleLinkedList &lista, Meses fecha, int &cantidadBs, string iof){
     int ini = 0, fin = v.size() -1, mit, dato;
     int valorMit ;
     cantidadBs = 0;
@@ -115,7 +74,6 @@ int busqBin(vector <bitacora*> &v, Meses fecha, int &cantidadBs, string iof){
     }
     return -1;
 }
-
 // Complejidad: O(n)
 void guardarArchivo(DoubleLinkedList *lista) {
     ofstream archNuevaB("C:\\Users\\josee\\CLionProjects\\TC1031\\nuevaBitacora.txt");
@@ -150,7 +108,7 @@ int main() {
     lista.print();
 
     //Pide al usuario el ip inicial y final a buscar
-    cout << "INgresa el ip a buscar" << endl;
+    cout << "Ingresa el ip a buscar" << endl;
     cin >> ipb;
     cout << "Ingresa el ip de inicio de la busqueda "<<endl ;
     cin >> ipi;
@@ -160,7 +118,7 @@ int main() {
     /*
     //Busca el primer indice en donde encuentre la fecha buscada por el usuario
     ini = busqBin(registros, inicio, cantidadBs, iof);
-    iof ="fin" ;
+    iof = "fin" ;
     //Busca el ultimo indice en donde encuentre la fecha buscada por el usuario
     fini = busqBin(registros, fin, cantidadBs, iof);
 
@@ -172,9 +130,6 @@ int main() {
     //Llama a la funcion guardarArchivo
     guardarArchivo(lista);
     */
-
-    //Prueba de DoubleLinkedList
-
 
     return 0;
 }
