@@ -143,7 +143,7 @@ int main() {
 
     int n = lista.size();
 
-    lista.print();
+    //lista.print();
 
     lista.sort();
 
