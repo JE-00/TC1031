@@ -5,12 +5,13 @@
 #ifndef TC1031_NODE_H
 #define TC1031_NODE_H
 
-long ipToLong(string ip){
+long long ipToLong(string ip){
     int idx = 0;
-    long datoFinal= 0, dato = 0;
+    long long datoFinal = 0;
+    long dato = 0;
     while (idx < ip.size()){
-        if (ip[idx]!= '.' && ip[idx]!=':'){
-            dato = dato*10 + ip[idx]-'0';
+        if (ip[idx] != '.' && ip[idx] != ':'){
+            dato = dato*10 + ip[idx] - '0';
         }
         else{
             datoFinal = datoFinal*1000 + dato;
@@ -26,7 +27,7 @@ struct info {
     string fechaHora;
     string ip;
     string motivo;
-    long key = ipToLong(ip);
+    long long key = ipToLong(ip);
 };
 
 class Node{
@@ -49,11 +50,13 @@ Node :: Node(info data) {
     this -> data = data;
     this -> next = nullptr; //this no necesario
     this -> prev = nullptr;
+    data.key = ipToLong(data.ip);
 }
 Node :: Node(info data, Node *prev, Node *next) {
     this -> data = data;
     this -> next = next;
     this -> prev = prev;
+    data.key = ipToLong(data.ip);
 }
 
 info Node :: getData() {
@@ -67,6 +70,7 @@ Node* Node :: getPrev() {
 }
 void Node ::setData(info data) {
     this -> data = data;
+    data.key = ipToLong(data.ip);
 }
 void Node :: setNext(Node *next) {
     this -> next = next;
