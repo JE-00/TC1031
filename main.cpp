@@ -33,6 +33,7 @@ void leerArchivo(DoubleLinkedList &lista) {
             getline(archBitacora,data.motivo);
 
             data.fechaHora = dia + ' ' + mes + ' ' + hora;
+            data.key = ipToLong(data.ip);
             // Se guardan los elementos como atributos de elementos bitacora del vector registros
             lista.addLast(data);
         }
