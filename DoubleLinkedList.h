@@ -43,8 +43,9 @@ DoubleLinkedList :: ~DoubleLinkedList() {
 void DoubleLinkedList :: addFirst(info data) {
     if (head != nullptr) { // Si head no es null, significa que ya hay nodos en la linkedlist
 
-        Node *nodo = new Node (data, head->getPrev(), head);// Si ya hay nodos, creamos un nodo que reemplazara al head actual
+        Node *nodo = new Node (data, head->getPrev(), head); // Si ya hay nodos, creamos un nodo que reemplazara al head actual
                                                             // su prev será null y su next será el head anterior
+        head -> setPrev(nodo); // el nuevo nodo se vuelve el previo de head
         head = nodo; // el nuevo nodo se convierte en head
 
     } else { // Si head es null entonces no hay nodos y se debe crear el primer nodo
@@ -58,11 +59,13 @@ void DoubleLinkedList :: addFirst(info data) {
 // addLast
 void DoubleLinkedList ::addLast(info data) {
     if (tail != nullptr) { // Si tail no es null, significa que ya hay nodos en la linkedlist
-        Node *nodo = new Node (data, tail, tail->getNext()); // Si ya hay nodos, creamos un nodo que reemplazara al tail actual
+        Node *nodo = new Node (data, tail, nullptr); // Si ya hay nodos, creamos un nodo que reemplazara al tail actual
                                                                     // su prev será el tail anterior y su next será el nullptr
-        tail = nodo; // el nuevo nodo se convierte en tail
+        tail->setNext(nodo); // el nuevo nodo se convierte en el siguiente de tail
+        tail = nodo; // el nuevo nodo se convierte en tail (la neta aqui no sé que hice pero ya funciona jajajaja wuu) ¯\_(ツ)_/¯
 
     } else { // Si tail es null entonces no hay nodos y se debe crear el primer(y por consecuencia último) nodo
+
         tail = head = new Node (data, nullptr, nullptr); // En el primer nodo head = tail porque es un único elemento
                                                                     // su prev y next serán null porque apuntan a nada
     }
