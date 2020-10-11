@@ -6,14 +6,13 @@
  * Andres Limon Calleja A01552116
  * José Carlos Esquerra Rivas A00827879
 */
+
 #include <iostream>
 #include <string>
 #include <fstream>
 
 using namespace std;
 
-#include "Meses.h"
-#include "bitacora.h"
 #include "DoubleLinkedList.h"
 
 // Complejidad: O(n^2) <- Complejidad incluyendo la complejidad del getline
@@ -27,9 +26,9 @@ void leerArchivo(DoubleLinkedList &lista) {
 
     // Se lee cada linea del archivo y se guardan en un vector de bitacoras llamado registros
     if (archBitacora.is_open()) {
-        // Se leen en archBitacora >> fechaHora
+        // Se leen en archBitacora >> fechaHora >> ip
         while (archBitacora >> dia >> mes >> hora >> data.ip) {
-            // Se lee y guarda el resto de la linea en razonFalla
+            // Se lee y guarda el resto de la linea en motivo
             getline(archBitacora,data.motivo);
 
             data.fechaHora = dia + ' ' + mes + ' ' + hora;
@@ -42,55 +41,49 @@ void leerArchivo(DoubleLinkedList &lista) {
     }
 }
 
-/*
-// Esta funcion utiliza el metodo de la busqueda binaria para encontrar un dato en un vector que es buscado por el usuario
-//  O(log2n)
-int busqBin(DoubleLinkedList &lista, Meses fecha, int &cantidadBs, string iof){
-    int ini = 0, fin = v.size() -1, mit, dato;
-    int valorMit ;
-    cantidadBs = 0;
-    while (ini <= fin){
-        mit = (ini + fin)/2 ;
-        valorMit = v[mit]->getKey() ;
-        // si la fecha que se esta buscando es la fecha inicial entonces se utiliza esta parte del codigo
-        if (iof == "inicio"){
-            if (fecha.getKey() == valorMit && v[mit-1]->getKey() != valorMit) {
-                return mit ;
-            }else if  (fecha.getKey() > valorMit){
-                ini = mit + 1;
-            }else{
-                fin = mit - 1;
-            }
-            // si la fecha que se esta buscando es la ultima se utiliza esta parte del codigo
-        }else{
-            if (fecha.getKey() == valorMit && v[mit+1]->getKey() != valorMit) {
-                return mit ;
-            }else if  (fecha.getKey() < valorMit){
-                fin = mit - 1;
-            }else{
-                ini = mit + 1;
-            }
-        }
-    }
-    return -1;
+//Complejidad   O(log2n)
+int busqBin(DoubleLinkedList *lista, long long pos){
+	int inicio = 0; // Variable que va a ir cambiando (el inicio)
+	int fin = lista->getTamanio() ; //final de la lista - size
+	int mit;
+	long long Valormit;
+
+	while (inicio <= fin){
+		mit = (inicio+fin) / 2;
+		Valormit = lista->get(mit).key ;
+		if (pos == Valormit && lista->get(mit-1).key!=pos){
+			return mit;
+		}else if (pos > Valormit ){
+			if(pos < lista->get(mit+1).key){
+				return mit ;
+			}
+			inicio = mit+1;
+		}else{
+			if(pos > lista->get(mit-1).key){
+				return mit ;
+			}
+			fin = mit -1 ;
+		}
+	}
+	return -1;
 }
+
 // Complejidad: O(n)
-void guardarArchivo(DoubleLinkedList *lista) {
+void guardarArchivo(DoubleLinkedList &lista) {
     ofstream archNuevaB("C:\\Users\\josee\\CLionProjects\\TC1031\\nuevaBitacora.txt");
     if (archNuevaB.is_open()) {
         // En un ciclo de 0 al tamaño del vector registros se imprimen los atributos de cada elemento separados por un espacio
-        for (int i = 0; i < lista->size(); ++i) {
-            archNuevaB << lista. << " " << registros[i]->getDia() << " " << registros[i]->getHora() <<
-                       " " << registros[i]->getDireccionIP() << registros[i]->getRazonFalla() << endl;
+        for (int i = 0; i < lista.size(); ++i) {
+            archNuevaB << lista.get(i).fechaHora << " " << lista.get(i).ip << lista.get(i).motivo << endl;
         } archNuevaB.close(); // Se cierra archNuevaB para guardar cambios
     }
 }
-*/
+
 
 int main() {
-    string ipi, ipf, ipb;
-    string iof = "inicio";
-    int ini, fini;
+    string ipi, ipf;
+    long long ini, fini;
+    int ki,kf;
 
 
     // Crea el vector reegistros de tipo bitacora
@@ -99,37 +92,35 @@ int main() {
     // Llama a la función leerArchivo
     leerArchivo(lista);
 
-    int n = lista.size();
-
-    //lista.print();
-
     lista.sort();
-
     lista.print();
 
     //Pide al usuario el ip inicial y final a buscar
-    cout << "Ingresa el ip a buscar" << endl;
-    cin >> ipb;
     cout << "Ingresa el ip de inicio de la busqueda "<<endl ;
     cin >> ipi;
     cout << "Ingresa el ip de final de la busqueda "<<endl ;
     cin >> ipf;
 
-    /*
-    //Busca el primer indice en donde encuentre la fecha buscada por el usuario
-    ini = busqBin(registros, inicio, cantidadBs, iof);
-    iof = "fin" ;
-    //Busca el ultimo indice en donde encuentre la fecha buscada por el usuario
-    fini = busqBin(registros, fin, cantidadBs, iof);
+    ini = ipToLong(ipi);
+    fini = ipToLong(ipf);
 
-    //Despliega los atributos de el rango de fechas buscadas por el usuario
-    for (int i = ini ; i < fini; i++){
-        registros[i] -> print() ;
+    ki = busqBin(&lista,ini);
+    kf = busqBin(&lista,fini);
+
+    cout << endl;
+
+    DoubleLinkedList *l = &lista;
+
+    cout << "RESULTADO DE LA BUSQUEDA" <<endl;
+    for (int i=ki; i<=kf;i++){
+        cout << "--------------------------------" << endl;
+        cout << l->get(i).fechaHora << " ";
+        cout << l->get(i).ip << " ";
+        cout << l->get(i).key;
+        cout << l->get(i).motivo << endl;
     }
 
-    //Llama a la funcion guardarArchivo
     guardarArchivo(lista);
-    */
 
     return 0;
 }

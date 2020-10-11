@@ -16,6 +16,8 @@ public:
     int size();
     void sort();
     void print();
+    int getTamanio();
+    info get(int pos);
 private:
     Node *head;
     Node *tail;
@@ -58,20 +60,43 @@ void DoubleLinkedList :: addFirst(info data) {
 }
 
 // addLast
-void DoubleLinkedList ::addLast(info data) {
-    if (tail != nullptr) { // Si tail no es null, significa que ya hay nodos en la linkedlist
+void DoubleLinkedList :: addLast(info data) {
+    Node *prevTail, *newTail;
+    if (head == nullptr) {
+        newTail = new Node(data);
+        head = newTail;
+        tail = nullptr;
+    } else {
+        if (tail == nullptr) {
+            tail = new Node(data);
+            head->setNext(tail);
+            tail->setPrev(head);
+        } else {
+            prevTail = tail;
+            newTail = new Node(data);
 
-        Node *nodo = new Node (data, tail, nullptr); // Si ya hay nodos, creamos un nodo que reemplazara al tail actual
+            newTail->setPrev(prevTail);
+            prevTail->setNext(newTail);
+            tail = newTail;
+        }
+    }
+    /*if (tail != nullptr) { // Si tail no es null, significa que ya hay nodos en la linkedlist
+        Node *nodo = new Node (data); // Si ya hay nodos, creamos un nodo que reemplazara al tail actual
                                                                     // su prev será el tail anterior y su next será el nullptr
-        tail->setNext(nodo); // el nuevo nodo se convierte en el siguiente de tail
+        //aux->setNext(nodo); // el nuevo nodo se convierte en el siguiente de tail
+        nodo->setPrev(tail);
+        aux->setNext(nodo);
+
 
         tail = nodo; // el nuevo nodo se convierte en tail (la neta aqui no sé que hice pero ya funciona jajajaja wuu) ¯\_(ツ)_/¯
 
+
     } else { // Si tail es null entonces no hay nodos y se debe crear el primer(y por consecuencia último) nodo
 
-        tail = head = new Node (data, nullptr, nullptr); // En el primer nodo head = tail porque es un único elemento
+        Node *nodo = new Node (data, nullptr, nullptr);
+        tail = head = nodo; // En el primer nodo head = tail porque es un único elemento
                                                                     // su prev y next serán null porque apuntan a nada
-    }
+    }*/
     tamanio++; // Pues su tamaño sube en uno
 }
 
@@ -144,6 +169,18 @@ void DoubleLinkedList ::print() {
 
         curr = curr->getNext();
     }
+}
+
+info DoubleLinkedList::get(int pos){
+    Node *curr = head ;
+    for (int i=0; i<pos; i++){
+        curr = curr ->getNext() ;
+    }
+    return curr->getData();
+}
+
+int DoubleLinkedList ::getTamanio() {
+    return tamanio;
 }
 
 #endif //TC1031_DOUBLELINKEDLIST_H
