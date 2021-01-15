@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/josee/CLionProjects/Act-13/Meses.h
+
+C:/Users/josee/CLionProjects/Act-13/bitacora.h
+
+C:/Users/josee/CLionProjects/Act-13/main.cpp
+iostream
+-
+vector
+-
+fstream
+-
+string
+-
+Meses.h
+C:/Users/josee/CLionProjects/Act-13/Meses.h
+bitacora.h
+C:/Users/josee/CLionProjects/Act-13/bitacora.h
+
